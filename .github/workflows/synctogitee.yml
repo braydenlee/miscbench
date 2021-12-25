@@ -1,0 +1,20 @@
+name: Sync Github Repos To Gitee
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sync to Gitee
+      uses: wearerequired/git-mirror-action@master
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.GITEE_PRIVATE_KEY }}
+      with:
+        #Source warehouse
+        source-repo: "git@github.com:braydenlee/miscbenchgit"
+        #Target warehouse
+        destination-repo: "git@gitee.com:braydenlee/miscbench.git"
